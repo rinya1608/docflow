@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d %highlight{%-5p} %style{%pid}{magenta} [%thread] %style{%C{1.}}{cyan}.%M(%F:%L) : %m%n
+        </Property>
+        <Property name="LOG_ROOT">
+            logs/
+        </Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="file"
+                     fileName="${LOG_ROOT}docflow.log"
+                     filePattern="${LOG_ROOT}docflow-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10">
+                <Delete basePath="${LOG_ROOT}" maxDepth="10">
+                    <IfLastModified age="30d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="ru.yarullin.docflow" additivity="false" level="debug">
+            <AppenderRef ref="file"/>
+        </Logger>
+        <Root level="warn">
+            <AppenderRef ref="file"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
