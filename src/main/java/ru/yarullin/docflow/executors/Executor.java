@@ -12,4 +12,9 @@ public interface Executor<T> {
      * @param t исполняемое событие
      */
     void execute(T t);
+
+    /**
+     * Метод для завершения работы исполнителя
+     */
+    void shutdown();
 }

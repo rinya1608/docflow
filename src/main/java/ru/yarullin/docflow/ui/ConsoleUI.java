@@ -20,12 +20,16 @@ public class ConsoleUI implements UserInterface {
 
     @Override
     public void start() {
-        while (true) {
-            System.out.print("docflow: ");
-            Scanner in = new Scanner(System.in);
-            String cmd = in.nextLine();
-            if (cmd.equalsIgnoreCase(Command.EXIT.getName())) break;
-            executor.execute(cmd);
+        try {
+            while (true) {
+                System.out.print("docflow: ");
+                Scanner in = new Scanner(System.in);
+                String cmd = in.nextLine();
+                if (cmd.equalsIgnoreCase(Command.EXIT.getName())) break;
+                executor.execute(cmd);
+            }
+        } finally {
+            executor.shutdown();
         }
     }
 }
