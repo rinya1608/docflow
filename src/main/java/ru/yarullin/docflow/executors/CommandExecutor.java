@@ -141,15 +141,21 @@ public class CommandExecutor implements Executor<String> {
      * Метод выводит имена и статусы потоков
      */
     protected void getThreadsStatus() {
-        Thread.getAllStackTraces().keySet().stream().filter(thread -> thread.getName().startsWith("cmd"))
-                .forEach(thread -> {
-                    Thread.State threadState = thread.getState();
-                    OperationStatus operationStatus = RUNNABLE.equals(threadState) ?
-                            OperationStatus.IN_PROGRESS :
-                            WAITING.equals(threadState) ? OperationStatus.WAIT : null;
-                    String status = operationStatus != null ? operationStatus.getText() : threadState.name();
-                    System.out.println(thread.getName() + " " + status);
-                });
+        List<Thread> cmdThreads = Thread.getAllStackTraces().keySet().stream()
+                .filter(thread -> thread.getName().startsWith("cmd"))
+                .toList();
+
+        if (cmdThreads.isEmpty())
+            System.out.println("Выполняющихся операций нет");
+        else
+            cmdThreads.forEach(thread -> {
+                Thread.State threadState = thread.getState();
+                OperationStatus operationStatus = RUNNABLE.equals(threadState) ?
+                        OperationStatus.IN_PROGRESS :
+                        WAITING.equals(threadState) ? OperationStatus.WAIT : null;
+                String status = operationStatus != null ? operationStatus.getText() : threadState.name();
+                System.out.println(thread.getName() + " " + status);
+            });
     }
 
     /**
