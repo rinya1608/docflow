@@ -11,9 +11,9 @@ import ru.yarullin.docflow.entity.constants.DocumentFieldName;
 import ru.yarullin.docflow.entity.enums.DocumentType;
 import ru.yarullin.docflow.entity.enums.OrderStatus;
 
-public class JsonObjectToDocument implements Converter<Document, JSONObject> {
+public class JsonObjectToDocumentConverter implements Converter<Document, JSONObject> {
 
-    private static final Logger logger = LogManager.getLogger(JsonObjectToDocument.class);
+    private static final Logger logger = LogManager.getLogger(JsonObjectToDocumentConverter.class);
 
     @Override
     public Document convert(JSONObject jsonObject) {

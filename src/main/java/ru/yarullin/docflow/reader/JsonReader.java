@@ -5,16 +5,12 @@ import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import ru.yarullin.docflow.converter.Converter;
-import ru.yarullin.docflow.converter.JsonObjectToDocument;
+import ru.yarullin.docflow.converter.JsonObjectToDocumentConverter;
 import ru.yarullin.docflow.entity.Document;
 import ru.yarullin.docflow.exceptions.DataException;
-import ru.yarullin.docflow.writer.JsonWriter;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +28,7 @@ public class JsonReader implements Reader<Document> {
 
     public JsonReader() {
         jsonParser = new JSONParser();
-        converter = new JsonObjectToDocument();
+        converter = new JsonObjectToDocumentConverter();
     }
 
     /**
